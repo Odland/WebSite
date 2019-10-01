@@ -14,7 +14,7 @@ class Blog(models.Model):
     # 删除关联类型报错:ProtectedError
     blog_type = models.ForeignKey(BlogType,on_delete=models.PROTECT) # 标题类型
     author = models.ForeignKey(User,on_delete=models.PROTECT) # 作者
-    content = models.TextField() # 文章内容
+    content = models.TextField(blank=True) # 文章内容
     created_time = models.DateTimeField(auto_now_add=True) # 创建时间
     last_updated_time = models.DateTimeField(auto_now_add=True) # 上一次更新时间
 
