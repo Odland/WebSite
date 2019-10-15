@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class BlogType(models.Model):
     type_name = models.CharField(max_length=50)
     
+    class Meta:
+        db_table = 'blogtype'
+
     def __str__(self):
         return self.type_name  # 显示标题类型
 
@@ -18,6 +21,17 @@ class Blog(models.Model):
     created_time = models.DateTimeField(auto_now_add=True) # 创建时间
     last_updated_time = models.DateTimeField(auto_now_add=True) # 上一次更新时间
 
+    class Meta:
+        db_table = 'blog'
+
+
     def __str__(self):
         return "<Blog: %s>" % self.title # 显示标题
 
+
+class BlogImage(models.Model):
+    '''存储图片'''
+    image = models.ImageField()
+
+    class Meta:
+        db_table = 'blogimage'
