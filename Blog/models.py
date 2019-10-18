@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+upload_dir = ''
+filename = ''
 class BlogType(models.Model):
     type_name = models.CharField(max_length=50)
     
@@ -31,7 +33,10 @@ class Blog(models.Model):
 
 class BlogImage(models.Model):
     '''存储图片'''
-    image = models.ImageField()
+    def get_dir(filename):
+        return upload_dir + filename
+    image = models.ImageField(upload_to=get_dir(filename))
+
 
     class Meta:
         db_table = 'blogimage'

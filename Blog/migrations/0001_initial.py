@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('created_time', models.DateTimeField(auto_now_add=True)),
                 ('last_updated_time', models.DateTimeField(auto_now_add=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('blog_type', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='Home.BlogType')),
+                ('blog_type', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='Blog.BlogType')),
             ],
         ),
     ]
