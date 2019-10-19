@@ -3,7 +3,7 @@ from .models import BlogType, Blog
 # Register your models here.
 @admin.register(BlogType)
 class BlogTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','type_name')  # 显示的内容
+    list_display = ('type_name',)  # 显示的内容
 
 
 @admin.register(Blog)

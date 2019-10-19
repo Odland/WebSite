@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 upload_dir = ''
 filename = ''
 class BlogType(models.Model):
-    type_name = models.CharField(max_length=50)
-    
+    type_name = models.CharField(max_length=30,unique=True,primary_key=True)
     class Meta:
         db_table = 'blogtype'
 
@@ -17,8 +16,8 @@ class BlogType(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=50) # 标题
     # 删除关联类型报错:ProtectedError
-    blog_type = models.ForeignKey(BlogType,on_delete=models.PROTECT) # 标题类型
-    author = models.ForeignKey(User,on_delete=models.PROTECT) # 作者
+    blog_type = models.ForeignKey('BlogType', related_name='posttype', on_delete=models.PROTECT) # 标题类型
+    author = models.ForeignKey(User,related_name='user',on_delete=models.PROTECT) # 作者
     content = models.TextField(blank=True) # 文章内容
     created_time = models.DateTimeField(auto_now_add=True) # 创建时间
     last_updated_time = models.DateTimeField(auto_now_add=True) # 上一次更新时间
@@ -36,7 +35,7 @@ class BlogImage(models.Model):
     def get_dir(filename):
         return upload_dir + filename
     image = models.ImageField(upload_to=get_dir(filename))
-
+    blogcontent = models.ForeignKey(Blog,related_name='image',on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'blogimage'
